@@ -53,6 +53,10 @@ class Document(models.Model):
         readonly=False, store=True, help='Publish this file to wibsite')
 
     is_research = fields.Boolean(string='Is Document Research', default=False)
+    
+    type = fields.Selection([('url', 'URL'), ('binary', 'File'), ('empty', 'Request')],
+                            string='Type', required=True, store=True, default='empty', change_default=True,
+                            compute='_compute_type')
 
     research_degree = fields.Selection(([('phd', 'PHD'),('master', 'Master'),('other','Other')]), string="Degree" , default='other')
 
